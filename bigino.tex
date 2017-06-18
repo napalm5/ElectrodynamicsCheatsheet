@@ -291,8 +291,8 @@ Passando ad uno spazio di Fourier si ha
 Risolvendo, si hanno due soluzioni:
 \begin{align}
   \label{eq:20}
-  D_{ritardata}=\frac{1}{2\pi}\theta(x_0-x'_0)\delta[(x-x')^2] \\
-  D_{anticipata}=\frac{1}{2\pi}\theta(x'_0-x_0)\delta[(x-x')^2] 
+  D_{ritardata}=\frac{1}{2\pi}\Theta(x_0-x'_0)\delta[(x-x')^2] \\
+  D_{anticipata}=\frac{1}{2\pi}\Theta(x'_0-x_0)\delta[(x-x')^2] 
 \end{align}
 
 \section{Moving charges}
@@ -313,8 +313,21 @@ Partiamo trovando i potenziali
   A^\mu(x)=\frac{4\pi}{c}\int d^4x'D_r(x-x')J^\mu(x')
 \end{align}
 Sostituendo l'eq \ref{eq:21} a pagina \pageref{eq:21}, si ottiene
-
-
+\begin{align}
+  \label{eq:22}
+  A^\mu(x)=2q \int d\tau u^\mu(\tau)\Theta(x_0-r_0(\tau))\delta([x-r(\tau)]^2)
+\end{align}
+Considering the properties of the delta, and that  $\delta([x-r(\tau)])$ implies that only the points on the trajectory that lie on the backward light cone starting from $x^\mu$ can contribute to the potential (and also that $x_0-r_0(\tau_0)=\left| \mathbf{x}-\mathbf{r}(\tau) \right|$), we have:
+\begin{gather}
+  \label{eq:23}
+  \begin{aligned}[t]
+    A^\mu(x)=\frac{qu^\mu(\tau)}{u^\nu(\tau)(x-r(\tau))_{\nu}}\bigg\rvert_{\tau=\tau_0} \\
+  \end{aligned} \\ 
+  \begin{split}
+    \Phi(\mathbf{x},t)=\frac{q}{(1-\boldsymbol{\beta}\cdot\mathbf{n})R}\bigg\rvert_{\tau=\tau_0} \\
+    A(\mathbf{x},t)=\frac{q\boldsymbol{\beta}}{(1-\boldsymbol{\beta}\cdot\mathbf{n})R}\bigg\rvert_{\tau=\tau_0} \\  
+  \end{split}
+\end{gather}
 
 \section{Notazione}
 \label{sec:notazione}

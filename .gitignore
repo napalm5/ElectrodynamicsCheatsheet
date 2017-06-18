@@ -1,4 +1,9 @@
-Ignore latex/pdflatex auxiliary files:
+## ignore things
+*.prv*
+auto/
+
+##This part it is courtesy of Gabriele Bozzola (https://github.com/Sbozzolo)
+##Ignore latex/pdflatex auxiliary files:
 *.aux
 *.lof
 *.log
@@ -10,10 +15,6 @@ Ignore latex/pdflatex auxiliary files:
 *.fot
 *.cb
 *.cb2
-
-## by Claudio: ignore things
-*.prv*
-auto/
 
 
 ## Intermediate documents:
