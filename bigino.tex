@@ -1,0 +1,335 @@
+\documentclass[a4paper, twocolumn]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{enumitem}
+%\usepackage{kpfonts}
+%\usepackage{stackengine}
+\usepackage{calc}
+\usepackage[makeroom]{cancel}
+\usepackage{marginnote}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{mathtools}
+%\usepackage{yfonts}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+
+
+\title{Elettrodinamica classica}
+\author{Claudio Chiappetta}
+
+\date{\today}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{eg}[thm]{Example}
+\newtheorem{ex}[thm]{Exercise}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{rmk}[thm]{Remark}
+
+\newcommand{\ie}{\emph{i.e.} }
+\newcommand{\cf}{\emph{cf.} }
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\dirac}{\slashed{\partial}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\LieT}{\mathfrak{t}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand\abs[1]{\left|#1\right|}
+\newcommand{\angstrom}{\textup{\AA}}
+
+\newlength\shlength
+\newcommand\xshlongvec[2][0]{\setlength\shlength{#1pt}%
+	\stackengine{-5.6pt}{$#2$}{\smash{$\kern\shlength%
+			\stackengine{7.55pt}{$\mathchar"017E$}%
+			{\rule{\widthof{$#2$}}{.57pt}\kern.4pt}{O}{r}{F}{F}{L}\kern-\shlength$}}%
+	{O}{c}{F}{T}{S}}
+
+\newcommand*\mean[1]{\overline{#1}}
+
+\newcommand\pro{\item[$+$]}
+\newcommand\con{\item[$-$]}
+
+\newcount\colveccount
+\newcommand*\colvec[1]{
+        \global\colveccount#1
+        \begin{pmatrix}
+        \colvecnext
+}
+\def\colvecnext#1{
+        #1
+        \global\advance\colveccount-1
+        \ifnum\colveccount>0
+                \\
+                \expandafter\colvecnext
+        \else
+                \end{pmatrix}
+        \fi
+}
+
+
+\begin{document}
+\maketitle
+
+
+
+
+%\begin{abstract}
+%Abstract a caso:
+
+%\begin{itemize}
+%	\item Presentazione del corso
+ % \item Introduzione ai metodi di simulazione
+  %\item Discussione del metodo di Eulero
+  %\item 
+%\end{itemize}
+%\end{abstract}
+
+%\marginpar[left text]{Lezione 1}
+
+\section{Maxwell equations}
+\subsection{idk lol}
+\begin{align}
+	\vec{A}(\mathbf{x},t)=\int d^3\mathbf{x'}dt'\vec{J}(\mathbf{x'},t) \frac{\delta (t-t'- \frac{\left|\mathbf{x'}-\mathbf{x}\right|}{c})}{\left|\mathbf{x'}-\mathbf{x}\right|} \tag{$\alpha$ costanti se S.I.} \\
+		\phi (\mathbf{x},t)=\int d^3\mathbf{x'}dt' \rho(\mathbf{x'},t) \frac{\delta (t-t'- \frac{\left|\mathbf{x'}-\mathbf{x}\right|}{c})}{\left|\mathbf{x'}-\mathbf{x}\right|} \tag{$\alpha$ altre costanti se S.I.}
+\end{align}
+\subsection{Waves in dielectrics}
+\begin{equation}
+	\mathrm{D}=\epsilon_0 \mathrm{E} + \mathrm{P}
+\end{equation}
+\begin{equation}
+\begin{cases}
+\frac{\epsilon(\omega)}{\epsilon_0} =1 + \omega_p ^2 \sum_j \frac{\frac{f_j}{Z}}{w_j^2 - \gamma_j \omega - \omega^2} \\
+\epsilon_p=\frac{Z e^2 N}{\epsilon_0 m}
+\end{cases}
+\end{equation}
+\begin{equation}
+	\omega^2=k^2c^2+\omega_p^2
+\end{equation}
+\begin{equation}
+	\sigma_{Drude}=\frac{N f_0 e^2}{m \gamma_0 \epsilon_0}
+\end{equation}
+\begin{equation}
+	\frac{\epsilon(\omega)}{\epsilon_0} = 1 -\frac{\omega_p^2}{\omega^2} ~~\text{Per i plasmi}
+\end{equation}
+\begin{equation}
+	u(x,t)=\int_{-\infty}^{\infty}d\omega \left[\frac{2}{1+n(\omega)}\right]A(\omega) e^{i(k \cdot x-\omega t)} \tag{onda piana incidente in mezzo con $n(\omega)$}
+\end{equation}
+
+\section{Special relativity}
+
+\subsection{Introduction}
+\begin{equation}
+  ds= \frac{d\tau}{\gamma}
+\end{equation}
+
+Trasformazioni delle velocità, dove $\mathbf{u}$ è la velocità di traslazione fra i due sistemi, e $\mathbf{v}$ è la velocità della particella nel primo sistema
+\begin{gather}
+  \begin{split}
+    v_{\parallel}=\frac{v'_{\parallel}+u}{1+\frac{\mathbf{v'} \cdot \mathbf{u}}{c^2}} \\
+    \mathbf{v}_{\bot}=\frac{\mathbf{v}'_{\bot}}{\gamma (1+\frac{\mathbf{v'} \cdot \mathbf{u}}{c^2})} \\
+  \end{split}\\
+  \begin{aligned}[t]
+    v'_{\parallel}=\frac{v_{\parallel}-u}{1-\frac{\mathbf{v'} \cdot \mathbf{u}}{c^2}}     
+  \end{aligned}
+\end{gather}
+
+Supponendo $\mathbf{u}=u\mathbf{\hat{x}}$
+\begin{equation}
+  a_{x}=
+\end{equation}
+
+e:
+\begin{equation}
+  a_{\bot}=\frac{a'_\bot+\left[ \right]}{denominator}
+\end{equation}
+
+[Lasciamo perdere!]
+
+Questo quadrivettore velocità è invariante
+\begin{equation}
+  u^\mu \coloneqq \frac{dx^\mu}{d\tau}=\begin{pmatrix}c \gamma\\ \mathbf{v}\gamma\end{pmatrix}%=\colvec{2}{a}{b}
+\end{equation}
+Vediamo ora il quadrivettore accelerazione:
+\begin{align}
+  a^\mu \coloneqq \frac{d u^\mu}{d\tau}=\gamma \colvec{2}{c \frac{d\gamma}{d t}}{\frac{d\gamma}{d t}\mathbf{v}+\gamma\mathbf{a}}=\colvec{2}{c \gamma^4\dot{\beta}\cdot \beta}{\gamma^4\dot{\beta}\cdot{\beta}\mathbf{v}+\gamma\mathbf{a}} \\
+  a^2=-\gamma ^6 \left[ a^2-\frac{(\mathbf{v}\times \mathbf{a })^2}{c^2} \right]
+\end{align}
+
+\begin{align}
+  \label{eq:2}
+  \mathcal{L}=-\frac{mc^2}{\gamma} \\
+  \mathbf{p}=\frac{d\mathcal{L}}{d\mathbf{v}}=m\gamma\mathbf{v} \\
+  H = \mathbf{p}\cdot\mathbf{v}-\mathcal{L} \tag{Hamiltonian}=m\gamma c^2 =\epsilon
+\end{align}
+Introduciamo il quadrivettore momento:
+\begin{align}
+  \label{eq:3}
+  p^\mu=mv^\mu=m \colvec{2}{\gamma c}{\gamma \mathbf{u}}=\colvec{2}{\frac{\epsilon}{c}}{\mathbf{p}} \\
+  p^2=mc^2
+\end{align}
+
+Consideriamo ora un'onda piana, abbiamo \textbf{invarianza della fase}, poichè la fase è un conteggio di creste
+\begin{align}
+  \label{eq:4}
+  \phi=k\cdot\mathbf{x}-\omega t=k'\cdot\mathbf{x'}-\omega' t'
+\end{align}
+Da qui, sostituendo $x'^\mu$ usando il boost di Lorentz, ricavo l'ultimo quadrivettore:
+\begin{align}
+  \label{eq:5}
+  k^\mu=\colvec{2}{\frac{\omega}{c}}{\mathbf{k}}
+\end{align}
+Queste formule contengono l'effetto Doppler e la legge di aberrazione:
+\begin{align}
+  \label{eq:6}
+  \omega'=\gamma\omega(1-\beta\cos\theta)
+  \tan \theta'=\frac{\sin\theta}{\gamma\cos\theta-\beta}
+\end{align}
+\begin{align}
+  \label{eq:7}
+  \frac{dp^\mu}{d\tau}=F^\mu
+\end{align}
+
+\subsection{Covarianza dell'elettrodinamica}
+\label{sec:covar-dell}
+\begin{align}
+  \label{eq:8}
+  \frac{d}{d\tau} \colvec{2}{p_0}{\mathbf{p}}=\colvec{2}{\frac{q}{c} \mathbf{u}\cdot\mathbf{E}}{\frac{q}{c}( u_0\mathbf{E}+\mathbf{u}\times\mathbf{B})} %\\
+%  con~u^\mu \coloneqq \colvec{2}{c\gamma}{\mathbf{v}\gamma}
+\end{align}
+Voglio che il membro di destra sia un quadrivett, per cui introduco:
+\begin{align}
+  \label{eq:1}
+  J^\mu\coloneqq \colvec{2}{\rho c}{\rho \frac{dx}{dt}} \\
+  \partial^\mu J_\mu=\frac{\partial \rho}{\partial t} + \nabla\cdot\mathbf{J}
+\end{align}
+\begin{align}
+  \partial^\mu A_\mu \tag*{gauge di Lorenz} \nonumber \\
+  \Box A^\mu=4\pi J^\mu  \label{eq:9}
+\end{align}
+Da cui:
+\begin{align}
+  \label{eq:10}
+  F^{\mu\nu}\coloneqq \partial^\mu A^\nu - \partial^\nu A^\mu \\
+  F^{\mu\nu}=
+  \begin{pmatrix}
+    0 & -E_x & -E_y & -E_z \\
+    E_x & 0 & -B_z & B_y \\
+    E_y & B_z & 0 & -B_x \\
+    E_z & -B_y & B_x & 0 \\
+  \end{pmatrix} \\
+  F^{\mu\nu}=(\mathbf{E}, \mathbf{B}) \\
+  F_{\mu \nu}=(-\mathbf{E}, \mathbf{B}) \\
+  F^{*\mu \nu}=(\mathbf{B}, \mathbf{E}) \\
+  F^*_{\mu \nu}=(-\mathbf{B}, -\mathbf{E})
+\end{align}
+Riscriviamo le eq. di Maxwell
+\begin{align}
+  \label{eq:12}
+  \partial_\mu F^{\mu \nu}=\frac{4\pi}{c}J^\nu \\
+  \partial_\mu F^{*\mu \nu}=0 \\
+  \partial^\mu F^{\nu\rho}+\partial^\rho F^{\mu\nu}+\partial^\nu F^{\rho\mu}=0 \tag{forma alternativa per la seconda}
+\end{align}
+Posso riscrivere le eq. del moto in forma covariante
+\begin{align}
+  \label{eq:13}
+  \frac{dp^\mu}{d\tau}=m\frac{du^\mu}{d\tau}=\frac{q}{c}F^{\mu\nu}u_\nu
+\end{align}
+
+\subsection{Leggi di trasformazione dei campi}
+\label{sec:leggi-di-trasf}
+
+\begin{align}
+  \label{eq:14}
+  stranote
+\end{align}
+Vediamo alcuni invarianti
+\begin{align}
+  \label{eq:15}
+  \mathbf{E}^2-\mathbf{B}^2=cost \\
+  \mathbf{E}\cdot\mathbf{B}=cost
+\end{align}
+
+\subsection{Lagrangiana e Hamiltoniana di particella}
+\label{sec:lagr-e-hamilt}
+Un po' di formule a caso
+\begin{align}
+  \label{eq:16}
+  \mathcal{L}_{free}=-\frac{mc^2}{\gamma} \\
+  \mathcal{L}\gamma=cost \\
+  \frac{d}{dt}\frac{d\mathcal{L}}{d\mathbf{v}}=\frac{d\mathcal{L}}{d\mathbf{x}} \\
+  \frac{d\mathcal{L}_{free}}{d\mathbf{x}}=0 \\
+\end{align}
+
+\subsection{Soluzione all'eq. delle onde in forma covariante}
+\label{sec:soluz-alleq-delle}
+Risolviamo l'equazione \ref{eq:9} a pagina \pageref{eq:9}, supponendo $J^\mu=J^\mu(x)$, utilizzando una funzione di Green:
+\begin{align}
+  \label{eq:18}
+  \Box_x D(x-x')=\delta^{(4)}(x-x') \\
+  z\coloneqq x-x'
+\end{align}
+Passando ad uno spazio di Fourier si ha
+\begin{align}
+  \label{eq:19}
+  D(k)=\frac{1}{k\cdot k} \\
+  D(z)=-\frac{1}{(2\pi)^4}\int dk D(k) e^{-ik\cdot x}
+\end{align}
+Risolvendo, si hanno due soluzioni:
+\begin{align}
+  \label{eq:20}
+  D_{ritardata}=\frac{1}{2\pi}\theta(x_0-x'_0)\delta[(x-x')^2] \\
+  D_{anticipata}=\frac{1}{2\pi}\theta(x'_0-x_0)\delta[(x-x')^2] 
+\end{align}
+
+\section{Moving charges}
+\label{sec:mov-charges}
+
+Posso scrivere il quadrivettore delle sorgenti per una carica in moto come:
+\begin{align}
+  \label{eq:21}
+  J^\mu=qc \int d\tau u^\mu(\tau)\delta^{(4)}(x-r(\tau)) \\
+  u^\mu\coloneqq \colvec {2}{\gamma c}{\gamma \mathbf{v}} \qquad r(t)\coloneqq \colvec {2}{ct}{r(t)}
+\end{align}
+
+\subsection{Lienerd-Wichert}
+\label{sec:lienerd-wichert}
+Partiamo trovando i potenziali
+\begin{align}
+  \label{eq:17}
+  A^\mu(x)=\frac{4\pi}{c}\int d^4x'D_r(x-x')J^\mu(x')
+\end{align}
+Sostituendo l'eq \ref{eq:21} a pagina \pageref{eq:21}, si ottiene
+
+
+
+\section{Notazione}
+\label{sec:notazione}
+\begin{align}
+  \label{eq:11}
+  X_{\mu} \tag*{covariante} \\
+  X^{\mu} \tag*{controvariante} \\
+\end{align}
+
+\section{M.U.}
+\begin{equation}
+	1 ~\mathrm{eV} \approx 1.6 \cdot 10^{-19} \mathrm{J}
+\end{equation}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
