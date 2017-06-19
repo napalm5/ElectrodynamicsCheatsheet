@@ -81,6 +81,9 @@
 }
 
 
+%\newcommand{\d}{\mathrm{d}}
+
+
 \begin{document}
 \maketitle
 
@@ -297,6 +300,18 @@ Risolvendo, si hanno due soluzioni:
 
 \section{Moving charges}
 \label{sec:mov-charges}
+Un po' di notazione
+
+\vspace{2mm}
+\begin{centering}
+\begin{tabular}[l]{c c}
+  $x^\mu$ & osservatore \\
+  $r^\mu$ & carica in moto \\
+  $R$   & distanza fra osservatore e carica \\
+  $\mathbf{\hat{n}}$ & versore dalla carica all'osservatore \\
+\end{tabular}
+\end{centering}
+\vspace{5mm}
 
 Posso scrivere il quadrivettore delle sorgenti per una carica in moto come:
 \begin{align}
@@ -326,8 +341,37 @@ Considering the properties of the delta, and that  $\delta([x-r(\tau)])$ implies
   \begin{split}
     \Phi(\mathbf{x},t)=\frac{q}{(1-\boldsymbol{\beta}\cdot\mathbf{n})R}\bigg\rvert_{\tau=\tau_0} \\
     A(\mathbf{x},t)=\frac{q\boldsymbol{\beta}}{(1-\boldsymbol{\beta}\cdot\mathbf{n})R}\bigg\rvert_{\tau=\tau_0} \\  
-  \end{split}
+  \end{split} \\
+  \begin{aligned}[t]
+    \mathrm{con}~ \tau_0~ \mathrm{definito~da} ~(x-r(\tau_0))^2=0
+  \end{aligned}  
 \end{gather}
+
+Tramite derivazione di \ref{eq:22}, si trova il tensore del campo EM
+\begin{align}
+  \label{eq:24}
+  F^{\mu\nu}=\frac{e}{u\cdot(x-r)}\frac{d}{d\tau}\left[ \frac{(x-r)^\mu u^\nu - (x-r)^\nu u^\nu}{u\cdot(x-r)}   \right]   \Biggl\rvert_{\tau=\tau_0}
+\end{align}
+
+E di conseguenza i campi
+\begin{align}
+  \label{eq:25}
+  \mathbf{E}=q \frac{\mathbf{n}-\mathbf{\beta}}{\gamma^2(1-\mathbf{n}\cdot\mathbf{\beta})^3R^2} \biggl\rvert_{\tau=\tau_0}  +\frac{q}{c}\cdot\frac{\mathbf{n}\times(\mathbf{n}-\mathbf{\beta})\times\dot{\mathbf{\beta}}}{(1-\mathbf{n}\cdot\mathbf{\beta})^3 R}\Biggl\rvert_{\tau=\tau_0}\\
+  \mathbf{E}=\mathrm{campo~di~velocita'}(\alpha \frac{1}{r^2}) + \mathrm{campo~di~accelerazione}(\alpha \frac{1}{r}) \\
+  \mathbf{B}=[\mathbf{n}]_{rit}\times\mathbf{E} \\
+\end{align}
+
+Sappiamo che
+\begin{equation}
+  \label{eq:27}
+  \frac{dP}{d\Omega}=R^2 \mathbf{S}\cdot\mathbf{n}
+\end{equation}
+Considerando solo il campo di radiazione, e mettendoci nel caso non relativistico, otteniamo le \emph{formule di Larmor} non relativistica
+\begin{align}
+  \label{eq:26}
+  \frac{dP}{d\Omega}=\frac{q^2}{4\pi c^3}\dot{v}^2\sin^2\theta \\
+  P=\frac{2}{3}\frac{q^2}{c^2}\left| \dot{v}\right|^2
+\end{align}
 
 \section{Notazione}
 \label{sec:notazione}
