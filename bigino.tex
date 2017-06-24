@@ -6,11 +6,13 @@
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage[inter-unit-product =\cdot]{siunitx}
 \usepackage{tikz-cd}
 \usepackage{mathrsfs}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{enumitem}
-%\usepackage{kpfonts}
+\usepackage{url}
+% \usepackage{kpfonts}
 %\usepackage{stackengine}
 \usepackage{calc}
 \usepackage[makeroom]{cancel}
@@ -23,10 +25,11 @@
 \setlength{\parskip}{0.4em}
 
 
-\title{Elettrodinamica classica}
-%\author{Claudio Chiappetta}
+\title{Classical Electrodynamics}
 
 \date{\today}
+
+%some definitions, courtesy of Gabriele Bozzola (https://github.com/Sbozzolo)
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
 
@@ -63,6 +66,8 @@
 \newcommand\pro{\item[$+$]}
 \newcommand\con{\item[$-$]}
 
+
+%This is mine, instead
 \newcount\colveccount
 \newcommand*\colvec[1]{
         \global\colveccount#1
@@ -80,8 +85,8 @@
         \fi
 }
 
-
-%\newcommand{\d}{\mathrm{d}}
+%\sisetup{inter-unit-product =\cdot}
+\DeclareSIUnit\dyne{dyne}
 
 
 \begin{document}
@@ -104,6 +109,86 @@
 %\marginpar[left text]{Lezione 1}
 
 \section{Maxwell equations}
+Let's start from the basics:
+
+\begin{equation}
+  \label{eq:33}
+\begin{aligned}[c]
+  \nabla\cdot\mathbf{D}=\rho \\
+  \nabla\cdot\mathbf{B}=0 
+\end{aligned}
+\qquad
+\begin{aligned}[c]
+  \nabla\times\mathbf{E}+\frac{\partial\mathbf{B}}{\partial t}=0 \\
+  \nabla\times\mathbf{H}-\frac{\partial\mathbf{D}}{\partial t}=\mathbf{D}
+\end{aligned}
+\end{equation}
+
+\begin{gather}
+  \label{eq:35}
+  \begin{split}
+    \mu_0=\SI{4\pi e-1}{\newton\per\ampere\squared} \\
+    \epsilon_0=\SI{8.854e-12}{\farad\per\meter} \\
+    c=\SI{2.998}{\meter\per\second}
+  \end{split}
+\end{gather}
+
+\begin{gather}
+  \label{eq:36}
+  \begin{split}
+    D_i=D_i(\mathbf{E})=\sum_{j}\epsilon_{ij}\mathbf{E}_j+\mathrm{O}(E^2) \\
+    H_i=H_i(\mathbf{B})=\sum_{j}\mu_{ij}\mathbf{B}_j+\mathrm{O}(B^2)
+  \end{split}
+\end{gather}
+
+\subsection{Useful properties}
+\label{sec:useful-properties}
+\begin{gather}
+  \label{eq:37}
+  \begin{split}
+    A\cdot(B\times C)=(A\times B)\cdot C \\
+    A\times(B\times C)=B(A\cdot C)-C(A\cdot B)
+  \end{split}
+\end{gather}
+
+Every field $\mathbf{A}$ can be decomposed in this way
+\begin{align*}
+  \begin{aligned}
+    \mathbf{A}\coloneqq\mathbf{A}_l+\mathbf{A}_t \\
+  \end{aligned}
+  \qquad \text{\textbf{such that}}\qquad 
+  \begin{aligned}
+    \nabla\times\mathbf{A}_l=0 \\
+    \nabla\cdot\mathbf{A}_t =0\\
+  \end{aligned}
+\end{align*}
+
+\subsection{Useful theorems}
+\label{sec:useful-theorems}
+
+\begin{gather}
+  \label{eq:38}
+  \begin{split}
+    \int \displaylimits_V d^3\textbf{x}~ \nabla\cdot\mathbf{A}=\int\displaylimits_S d\mathbf{s}\cdot \mathbf{A} \qquad   \text{\textbf{Gauss}} \\
+    \int\displaylimits_S d\mathbf{s}\cdot(\nabla\times \mathbf{A})=\oint\displaylimits_C d\mathbf{l}\cdot\mathbf{A} \qquad \text{\textbf{Stokes}}
+  \end{split} 
+\end{gather}
+
+\subsection{Maxwell equations}
+\label{sec:maxwell-equations}
+Using the two homogenous Maxwell equations, we define the potentials $\mathbf{A}$ and $\phi$; using the two inhomogenous, selecting the Lorenz gauge, we kinda obtain \emph{wave equations} (if in the vacuum, we obtain proper wave equations)
+
+\begin{align}
+  \begin{aligned}[l]
+      \label{eq:40}
+      \nabla^2\phi -\frac{1}{c^2}\frac{\partial^2\phi}{\partial t^2}=-\frac{\rho}{\epsilon_0} \\
+      \nabla^2\mathbf{A}-\frac{1}{c^2}\frac{\partial^2\mathbf{A}}{\partial t^2}= -\mu_0 \mathbf{J} 
+  \end{aligned}
+\end{align}
+
+With the Coulomb gauge, we obtain the Poisson equation.
+
+We can solve eq. \ref{eq:40} by the means of the \emph{Green function}
 \subsection{idk lol}
 \begin{align}
 	\vec{A}(\mathbf{x},t)=\int d^3\mathbf{x'}dt'\vec{J}(\mathbf{x'},t) \frac{\delta (t-t'- \frac{\left|\mathbf{x'}-\mathbf{x}\right|}{c})}{\left|\mathbf{x'}-\mathbf{x}\right|} \tag{$\alpha$ costanti se S.I.} \\
@@ -372,6 +457,16 @@ Considerando solo il campo di radiazione, e mettendoci nel caso non relativistic
   \frac{dP}{d\Omega}=\frac{q^2}{4\pi c^3}\dot{v}^2\sin^2\theta \\
   P=\frac{2}{3}\frac{q^2}{c^2}\left| \dot{v}\right|^2
 \end{align}
+E le equivalenti relativistiche
+\begin{align}
+  \label{eq:28}
+  P=\frac{2}{3}\frac{q^2}{c^2} \frac{dp_\mu}{d\tau} \frac{dp^\mu}{d\tau}=\frac{2}{3}\frac{q^2}{c}\gamma^6[\dot{\beta}^2-(\beta\times\dot{\beta})^2] \\
+  \frac{dP}{d\Omega}(t')=\frac{q^2}{4\pi c}\frac{\left|\mathbf{n}\times(\mathbf{n}-\mathbf{\beta}\times\dot{\mathbf{\beta}})   \right|^2}{(1-\mathbf{n}\cdot\mathbf{\beta})^5}
+\end{align}
+
+
+
+
 
 \section{Notazione}
 \label{sec:notazione}
@@ -385,6 +480,32 @@ Considerando solo il campo di radiazione, e mettendoci nel caso non relativistic
 \begin{equation}
 	1 ~\mathrm{eV} \approx 1.6 \cdot 10^{-19} \mathrm{J}
 \end{equation}
+
+\subsection{Gaussian CGS}
+\label{sec:gaussian-cgs}
+We set the unit for $q$ such that
+\begin{align}
+  \label{eq:29}
+  F=\frac{q_1 q_2}{d^2}
+\end{align}
+Thus the unit of charge is called \emph{esu}, or \emph{statcoulomb}
+\begin{align}
+  \label{eq:30}
+  esu=\sqrt{\si{\dyne\cdot\cm^2} }=\si{\sqrt{\g\cdot\cm^3}\per\s}
+\end{align}
+Which results in
+\begin{align}
+  \label{eq:31}
+  \frac{F}{L}=\frac{2}{c^2}\frac{I_1 I_2}{d}
+\end{align}
+We can convert a charge $q$ from CGS to SI and viceversa by noting that the Coulomb force is the same in every system (for a more thourough explanation, see \url{http://www.rpi.edu/dept/phys/Courses/PHYS4210/S10/NotesOnUnits.pdf})
+\begin{align}
+  \label{eq:32}
+  q_{C}=\frac{q_{esu}}{10\cdot c_{SI}}
+\end{align}
+Where $q_C$ and $q_{esu}$ are the "number" of the respective measure unit contained in the charge $q$ (that wasn't veryclear, take a look at the link before)
+
+
 \end{document}
 %%% Local Variables:
 %%% mode: latex

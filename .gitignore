@@ -1,6 +1,8 @@
 ## ignore things
 *.prv*
 auto/
+*.tex~
+
 
 ##This part it is courtesy of Gabriele Bozzola (https://github.com/Sbozzolo)
 ##Ignore latex/pdflatex auxiliary files:
