@@ -87,14 +87,28 @@
 
 %\sisetup{inter-unit-product =\cdot}
 \DeclareSIUnit\dyne{dyne}
+\DeclareSIUnit\gauss{G}
+
+% to have multiple equations under the same tag
+\newenvironment{eqs}
+    {\begin{gather}
+        \begin{split}
+        }
+        { 
+        \end{split} 
+      \end{gather}
+    }
+
+\newcommand\id{\textrm{d}}
+    
+    % cases to the right
+%\newenvironment{rcases}
+%{}
+%{} 
 
 
 \begin{document}
 \maketitle
-
-
-
-
 %\begin{abstract}
 %Abstract a caso:
 
@@ -120,7 +134,7 @@ Let's start from the basics:
 \qquad
 \begin{aligned}[c]
   \nabla\times\mathbf{E}+\frac{\partial\mathbf{B}}{\partial t}=0 \\
-  \nabla\times\mathbf{H}-\frac{\partial\mathbf{D}}{\partial t}=\mathbf{D}
+  \nabla\times\mathbf{H}-\frac{\partial\mathbf{D}}{\partial t}=\mathbf{J}
 \end{aligned}
 \end{equation}
 
@@ -129,7 +143,8 @@ Let's start from the basics:
   \begin{split}
     \mu_0=\SI{4\pi e-1}{\newton\per\ampere\squared} \\
     \epsilon_0=\SI{8.854e-12}{\farad\per\meter} \\
-    c=\SI{2.998}{\meter\per\second}
+    c=\SI{2.998}{\meter\per\second} \\
+    v=\frac{c}{n}
   \end{split}
 \end{gather}
 
@@ -138,6 +153,13 @@ Let's start from the basics:
   \begin{split}
     D_i=D_i(\mathbf{E})=\sum_{j}\epsilon_{ij}\mathbf{E}_j+\mathrm{O}(E^2) \\
     H_i=H_i(\mathbf{B})=\sum_{j}\mu_{ij}\mathbf{B}_j+\mathrm{O}(B^2)
+  \end{split}
+\end{gather}
+
+\begin{gather}
+  \label{eq:59}
+  \begin{split}
+    W=\frac{1}{2}(\epsilon E^2+\mu B^2)
   \end{split}
 \end{gather}
 
@@ -216,34 +238,266 @@ And thus the potentials and the fields
 \end{gather}
 We can separate eq. \ref{eq:44} into a static and a time dependent term, obtaining the \emph{Jefimenko equations} (omitted)
 
-
-\subsection{idk lol}
+\subsection{Continuity equation}
+\label{sec:continuity-equation}
+In general, when a quantity $f$ is conserved, the \emph{continuity equation yields}:
 \begin{align}
-	\vec{A}(\mathbf{x},t)=\int d^3\mathbf{x'}dt'\vec{J}(\mathbf{x'},t) \frac{\delta (t-t'- \frac{\left|\mathbf{x'}-\mathbf{x}\right|}{c})}{\left|\mathbf{x'}-\mathbf{x}\right|} \tag{$\alpha$ costanti se S.I.} \\
-		\phi (\mathbf{x},t)=\int d^3\mathbf{x'}dt' \rho(\mathbf{x'},t) \frac{\delta (t-t'- \frac{\left|\mathbf{x'}-\mathbf{x}\right|}{c})}{\left|\mathbf{x'}-\mathbf{x}\right|} \tag{$\alpha$ altre costanti se S.I.}
+  \label{eq:44}
+  \frac{\partial \rho_f}{\partial t}+\nabla\cdot\mathbf{J}_f=\left(\frac{\partial \rho_f}{\partial t}\right)_S
 \end{align}
-\subsection{Waves in dielectrics}
+From Maxwell equation, we obtain the \emph{Poynting theorem} (conservation of energy)
+\begin{align}
+  \label{eq:45}
+  \frac{\partial u}{\partial t}+\nabla\cdot S=-\mathbf{J}\cdot\mathbf{E}
+\end{align}
+We can do the same thing for the conservation of the moment.
+
+%\subsection{idk lol}
+%\begin{align}
+%	\vec{A}(\mathbf{x},t)=\int d^3\mathbf{x'}dt'\vec{J}(\mathbf{x'},t) \frac{\delta (t-t'- \frac{\left|\mathbf{x'}-\mathbf{x}\right|}{c})}{\left|\mathbf{x'}-\mathbf{x}\right|} \tag{$\alpha$ costanti se S.I.} \\
+%		\phi (\mathbf{x},t)=\int d^3\mathbf{x'}dt' \rho(\mathbf{x'},t) \frac{\delta (t-t'- \frac{\left|\mathbf{x'}-\mathbf{x}\right|}{c})}{\left|\mathbf{x'}-\mathbf{x}\right|} \tag{$\alpha$ altre costanti se S.I.}
+   %  \end{align}
+
+\subsection{Plane waves and wave propagation}
+\label{sec:plane-waves-wave}
+
+Considering a plane wave propagating in the $z$ direction, or $\mathbf{E}=\mathbf{E}(z,t)$. Then the Maxwell equations can be written as
+\begin{align}
+  \label{eq:46}
+  omitted
+\end{align}
+blabla
+\begin{gather}
+  \label{eq:49}
+  \begin{aligned}
+    Z=\sqrt{\frac{\mu}{\epsilon}} \\
+    v=\frac{1}{\epsilon Z}=\frac{Z}{\mu}=\frac{1}{\sqrt{\epsilon\mu}} \\
+    n=\sqrt{\frac{\epsilon}{\epsilon_0}\frac{\mu}{\mu_0}}
+  \end{aligned}
+\end{gather}
+One more time, from this set of equations, we can obtain \emph{wave equations}. (this part may be omitted)
+\begin{gather}
+  \label{eq:50}
+  \begin{aligned}
+    \frac{\partial \mathbf{E}}{\partial z}=-\frac{1}{v}\frac{\partial}{\partial t}(Z\mathbf{H}\times\hat{z}) \\
+    \frac{\partial (Z\mathbf{H}\times\hat{z})}{\partial z}=-\frac{1}{v}  \frac{\partial \mathbf{E}}{\partial t} 
+  \end{aligned}
+\end{gather}
+Which has solution (with $\mathbf{F}$,$\mathbf{G}$ arbitrary functions)
+\begin{gather}
+  \label{eq:52}
+  \begin{aligned}
+    \mathbf{E}(z,t)=\mathbf{F}(z-vt)+\mathbf{G}(z+vt) \\
+    \mathbf{B}(z,t)=\frac{1}{Z}\hat{z}\left[\mathbf{F}(z-vt)-\mathbf{G}(z+vt)\right]
+  \end{aligned}
+\end{gather}
+Let's now see what happes in a lossy medium. We have
+\begin{gather}
+  \label{eq:53}
+  \begin{split}
+    \mathbf{J}_{cond}=\sigma\mathbf{E} \qquad \\
+    \mathbf{J}_{disp}=-i \omega\mathbf{D}=-i\omega\epsilon_d\mathbf{E}  \\
+    \mathbf{J}=\mathbf{J}_{cond}+\mathbf{J}_{disp}=-i\omega\epsilon_c\mathbf{E}
+  \end{split}
+\end{gather}
+With the same logic as before, but this time with different starting equation, we still obtain wave equations for the fields
+\begin{gather}
+  \label{eq:55}
+  \begin{aligned}
+    \mathbf{E}=\mathbf{E}_{0+}e^{ik_cz}+\mathbf{E}_{0-}e^{-ik_cz} \\
+    \mathbf{H}=\frac{1}{z_c}\hat{k}\times\mathbf{E} \qquad
+  \end{aligned}\\
+  \begin{aligned}
+    k_c=\beta+i \frac{\alpha}{2}=\omega\sqrt{\mu\epsilon_d}(1+i\tau)^{\frac{1}{2}}=\frac{\omega\mu}{Z_c} \\
+    \tau\coloneqq\frac{\mathrm{Im}(\epsilon_c)}{\mathrm{Re}(\epsilon_c)} =\frac{\frac{\sigma_s}{\omega}+\mathrm{Im}(\epsilon_d)}{\mathrm{Re}(\epsilon_d)}
+  \end{aligned}
+\end{gather}
+Where $\beta$ is the \emph{wave number} and $\alpha$ is the \emph{absorption coefficient}. The following relations hold:
+\begin{gather}
+  \label{eq:57}
+  \begin{split}
+    \alpha=\beta \frac{\mathrm{Im}(\frac{\epsilon}{\epsilon_o})}{\mathrm{Re}\frac{\epsilon}{\epsilon_0}} \\
+    \beta=k_0\sqrt{\mathrm{Re}\frac{\epsilon}{\epsilon_0}}
+  \end{split}
+\end{gather}
+\begin{gather}
+  \label{eq:58}
+  \begin{split}
+    k=\omega\sqrt{\mu\epsilon}
+  \end{split}
+\end{gather}
+
+If we take a wave propagatin in a generic direction $\hat{x}$, we can reduce it to the precedent (propagating along $\hat{z}$) case by the means of a rotation. Then the wave can be \textbf{TE} ($E\bot(x,y) $)or \textbf{TM} ($H\bot(x,y)$) [pg. 27]
+
+We have planes of constant amplitude ($\mathbf{\alpha}\cdot\mathbf{x}=\text{const}$), and planes of constant phase ($\mathbf{\beta}\cdot\mathbf{x}=\text{const}$); in a uniform wave they are the same ($\hat{\alpha}=\hat{\beta}=\hat{k}$).
+
+If a medium has $\epsilon<0$ and $\mu<0$, then $k<0$, and we have the following effects:
+\begin{itemize}
+\item Negative Doppler effect
+\item Inverted Cerenkov effect
+\item Inverted diffraction (the diffraction angle is inverted)
+\end{itemize}
+The ... has the following expression
 \begin{equation}
-	\mathrm{D}=\epsilon_0 \mathrm{E} + \mathrm{P}
+  \label{eq:60}
+  W=\frac{1}{2}\left[\frac{\partial}{\partial\omega}(\epsilon\omega)E^2+\frac{\partial}{\partial\omega}(\mu\omega)B^2\right]
 \end{equation}
+$\implies$ where $\epsilon\mu<0$ the wave can't propagate (consequences about refraction and reflection).
+
+Let's now see what happens at the interface between two media, considering an interface at $z=0$, and a plane wave normally incident; we can study \emph{dynamic properties} and \emph{cinematic properties}.
+
+Cinematic properties can be determined from the boundary conditions.
+\begin{gather}
+  \label{eq:39}
+  \begin{split}
+    \omega^i=&~\omega^t=\omega^r\\
+    \mathbf{k}_i\cdot\mathbf{x}\vert_{z=0}=&~\mathbf{k}_t\cdot\mathbf{x}\vert_{z=0}=\mathbf{k}_r\cdot\mathbf{x}\vert_{z=0} \\
+    \frac{\sin i}{\sin t}=&~\frac{k_t}{k}=\frac{n'}{n} 
+  \end{split}
+\end{gather}
+For the dynamic properties, we recall the following laws, derived from the Maxwell equations
+\begin{gather}
+  \label{eq:47}
+  \begin{split}
+    (\mathbf{D}_2-\mathbf{D}_1)\cdot\hat{n}=\sigma\\
+    (\mathbf{B}_2-\mathbf{B}_1)\cdot\hat{n}=0\\
+    \hat{n}\times(\mathbf{E}_2-\mathbf{E}_1)=0\\
+    \hat{n}\times(\mathbf{H}_2-\mathbf{H}_1)=\mathbf{J}
+  \end{split}  
+\end{gather}
+Considering TE ($\mathbf{E}=E\hat{y}$), we find the \emph{Fresnel formulas}
+
+
+\subsection{Frequency Dispersion Characteristics of Dielectrics,
+Conductors, and Plasmas}
 \begin{equation}
-\begin{cases}
-\frac{\epsilon(\omega)}{\epsilon_0} =1 + \omega_p ^2 \sum_j \frac{\frac{f_j}{Z}}{w_j^2 - \gamma_j \omega - \omega^2} \\
-\epsilon_p=\frac{Z e^2 N}{\epsilon_0 m}
-\end{cases}
+  \begin{split}
+    \mathrm{D}=&~\epsilon_0 \mathrm{E} + \mathrm{P} %\\
+    %\implies \frac{\epsilon(\omega)}{\epsilon_0}=1+\frac{Ze^2N}{\epsilon_0m}&~\sum_j \frac{f_j Z}{\omega_j^2-i\gamma\omega-\omega^2}
+  \end{split}
 \end{equation}
+\begin{gather}
+  \begin{cases}
+    \frac{\epsilon(\omega)}{\epsilon_0} =1 + \omega_p ^2 \sum_j \frac{\frac{f_j}{Z}}{w_j^2 - \gamma_j \omega - \omega^2} \\
+    \epsilon_p=\frac{Z e^2 N}{\epsilon_0 m}
+  \end{cases}\\
+  \begin{split}
+    \omega_j\approx \SI{e15}{\hertz};~ \gamma_j\approx 10^{11\div 12}\si{\hertz};~ w_p\approx \SI{e16}{\hertz}\\
+    \text{$\omega_j>>\gamma_j~\implies~\epsilon(\omega)~$ in generale è reale}
+  \end{split}\\  
+  \begin{aligned}[t]
+    \frac{\epsilon(\omega)}{\epsilon_0} =&~1 + \omega_p ^2\sum_j \frac{\frac{f_j}{Z}(\omega_j^2-\omega^2)}{(\omega_y^2-\omega^2)^2+\gamma^2_j\omega^2}+\\
+    &~i\omega_p^2\sum_j \frac{\frac{f_j}{Z}\gamma_j\omega}{(\omega_y^2-\omega^2)^2+\gamma^2_j\omega^2}
+  \end{aligned}
+\end{gather}
+If the charateristic frequancy $\omega_0=0$, we are modeling a conductor (there are free electrons).
+\begin{align}
+  \label{eq:48}
+  \begin{aligned}[t]
+    \frac{\epsilon(\omega)}{\epsilon_0}=&~1-\frac{\omega_p^2 \frac{f_0}{Z}}{\omega(\omega+i\gamma_0)}+\sum_{j\neq0}\frac{\omega_p^2 \frac{f_j}{Z}}{\omega_j^2-i\gamma_j\omega-\omega^2} \\
+    &\xrightarrow[\omega\to0]{}\epsilon_{bound}+i \frac{\omega_p^2 \frac{f_0}{Z}}{\omega(\gamma_0-i\omega)}
+\end{aligned}
+\end{align}
+
 \begin{equation}
 	\omega^2=k^2c^2+\omega_p^2
 \end{equation}
+Using the aproximation of small $\omega$, we can develop the \emph{Drude model}
 \begin{equation}
 	\sigma_{Drude}=\frac{N f_0 e^2}{m \gamma_0 \epsilon_0}
 \end{equation}
+If $\sigma_{Drude}$ is small, but not too small, it also has a complex component
+
+\subsection{Ionosphere propagation}
+\label{sec:ionosph-prop}
+\begin{gather}
+  \label{eq:51}
+  \begin{rcases}
+    \omega_j=0  & \forall~~ j \\
+    \gamma_0=0 & 
+  \end{rcases}
+  \begin{aligned}[c]
+    \qquad \epsilon(\omega)=\left(1-\frac{\omega_p^2}{\omega^2}  \right)\epsilon_o
+  \end{aligned}
+\end{gather}
+In this case, the magnetic field is not negligible ($B\sim0.1\div 1\si{\gauss}$).
+Considering, $B$ in the $\hat{z}$ direction, and a circularly polarized radiation propagating along the direction $\hat{z}$, we find
+\begin{align}
+  \label{eq:54}
+  \begin{split}
+    x_0=\frac{e\left(\frac{E_o}{n}\right)}{\omega(\omega\mp\omega_B)} \\
+    \frac{\epsilon(\omega)}{\epsilon_0}=1-\frac{\omega_p^2}{\omega(\omega\mp\omega_B)}
+  \end{split}
+\end{align}
+So, if we launch a radiation from earth to the ionosphere, we see that, separating the polarization into a clockwise ad a counterclockwise component, one of the two can propagate, while the other one cannot. this is an example of \emph{birefrengence}.
+%\begin{equation}
+%	\frac{\epsilon(\omega)}{\epsilon_0} = 1 -\frac{\omega_p^2}{\omega^2} ~~\text{Per i plasmi}
+% \end{equation}
+
+\subsection{Group velocity}
+\label{sec:group-velocity}
+What happens to a wave packet in a medium? Let's consider a multimode wave
 \begin{equation}
-	\frac{\epsilon(\omega)}{\epsilon_0} = 1 -\frac{\omega_p^2}{\omega^2} ~~\text{Per i plasmi}
+  \label{eq:56}
+  E(z,t)=\int\limits_{-\infty}^{\infty}\mathrm{d}k A(k)e^{ikz-i\omega t}
 \end{equation}
+A typical packet has different $k$, but centered around a $k_0$ and with a small spread. so we can expand, and by ignoring the orders $\geq2$ we can write
 \begin{equation}
-	u(x,t)=\int_{-\infty}^{\infty}d\omega \left[\frac{2}{1+n(\omega)}\right]A(\omega) e^{i(k \cdot x-\omega t)} \tag{onda piana incidente in mezzo con $n(\omega)$}
+  \label{eq:63}
+  E(z,t)=e^{i(V_gk_0-\omega_0t)}\int\mathrm{d}k A(k)e^{ik(z-V_gt)}
 \end{equation}
+So we have a packet that is rigidly translated at a velocity $v_g~\implies~$ energy is rigidly transferred at grup velocity.
+
+We can also find $v_g$ by noting that $\frac{\mathrm{d}k}{\mathrm{d}k}=\frac{\mathrm{d}\omega n(\omega)c^{-1}}{\mathrm{d}k}$
+In conclusion:
+\begin{align}
+  \label{eq:64}
+  \begin{split}
+    f_g=\frac{1}{n+\omega \frac{\mathrm{d}n}{\mathrm{d}\omega}}=\frac{\mathrm{d}\omega}{\mathrm{d}k}
+    v_f=\frac{c}{n}=\frac{\omega}{k}
+  \end{split}
+\end{align}
+Considering also higher orders, we find that $v_g$ can be higher than $c$, and also negative. So how do we interpret $v_g$y? It's not the speed of the information transfer; we transfer information with a discontinuity in the progation, so information always travels at speed $c$. $v_g$ looses meaning in regions with anomal dispersion. E.g. when there is absorption, the packet is highly distorted. We have to be careful when the approximation no longer yields
+
+
+\subsection{Arrival of a signal after propagation through
+a dispersive medium}
+\label{sec:arrival-signal-after}
+\begin{align}
+  \begin{split}
+    u(z,t)=\int_{-\infty}^{\infty}\mathrm{d}\omega \left[\frac{2}{1+n(\omega)}\right]A(\omega) e^{i(\frac{\omega n(\omega)}{c}z-\omega t)} 
+  \end{split}
+\end{align}
+(not really important)
+
+\subsection{Causality in the connection between D and E}
+\label{sec:caus-conn-betw}
+
+We saw that
+\begin{equation}
+  \label{eq:66}
+  \mathbf{D}(\mathbf{x},\omega)=\epsilon(\omega)\mathbf{E}(\mathbf{x},\omega)
+\end{equation}
+With some Fourier transform we can find
+\begin{align}
+  \label{eq:67}
+  \begin{split}
+    \mathbf{D}(\mathbf{x},t)=&~\epsilon_0\mathbf{E}(\mathbf{x},t)+\epsilon_0\int\mathrm{d}\tau G(\tau)\mathbf{E}(\mathbf{x},t-\tau) \\
+    G(\tau)&~\coloneqq \frac{1}{2\pi}\int\id \omega\left[\frac{\epsilon(\omega)}{\epsilon_0}-1\right]e^{-i\omega\tau} \\
+    \tau&~\coloneqq t-t'
+  \end{split}
+\end{align}
+This equation is not local in time. A couple observations:
+\begin{itemize}
+\item If the medium is not dispersive ($\epsilon(\omega)=const$), then the equation is local in time
+\item By calculation, we can find that $G(\tau)=0$ if $\tau<0$ (causality is conserved).
+\end{itemize}
+So far we didn't consider a spatial non-locality; in that, more general, case, we would have $\epsilon=\epsilon(k,w)$
+
+...
+
+There is a relation between the real and the imaginary part of $\epsilon$. Measuring one, the other can be obtained
+
 
 \section{Special relativity}
 
